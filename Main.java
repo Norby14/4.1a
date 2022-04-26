@@ -5,6 +5,7 @@ import java.io.IOException;
 class WrongStudentName extends Exception { }
 class WrongStudentAge extends Exception { }
 class WrongStudentDate extends Exception { }
+class WrongChoice extends Exception { }
 
 
 class Main {
@@ -13,7 +14,7 @@ class Main {
     public static void main(String[] args) {
         while(true) {
             try {
-                int ex = menu();
+                int ex = Readmenu();
                 switch(ex) {
                     case 1: exercise1(); break;
                     case 2: exercise2(); break;
@@ -31,17 +32,20 @@ class Main {
 					catch(WrongStudentDate e) {
                 System.out.println("Błędna data urodzenia studenta!");
             }
+					catch(WrongChoice e) {
+                System.out.println("Błędna data urodzenia studenta!");
+            }
         }
     }
 
-    public static int menu() {
-        System.out.println("Wciśnij:");
-        System.out.println("1 - aby dodać studenta");
-        System.out.println("2 - aby wypisać wszystkich studentów");
-        System.out.println("3 - aby wyszukać studenta po imieniu");
-        System.out.println("0 - aby wyjść z programu");
-        return scan.nextInt();
-    }
+    //public static int menu() {
+      //  System.out.println("Wciśnij:");
+        //System.out.println("1 - aby dodać studenta");
+        //System.out.println("2 - aby wypisać wszystkich studentów");
+        //System.out.println("3 - aby wyszukać studenta po imieniu");
+        //System.out.println("0 - aby wyjść z programu");
+        //return scan.nextInt();
+    //}
 
     public static String ReadName() throws WrongStudentName {
         scan.nextLine();
@@ -71,7 +75,30 @@ class Main {
 
         return date;
     }
+public static int ReadChoice() throws WrongChoice {
+       // scan.nextLine();
+       // System.out.println("Podaj wybór: ");
+        int wybor = scan.nextInt();
+        if(wybor<0)
+            throw new WrongChoice();
 
+        return wybor;
+    }
+	 public static int Readmenu() throws IOException,
+	WrongChoice{
+		 System.out.println("Wciśnij:");
+		
+		 
+        System.out.println("1 - aby dodać studenta");
+        System.out.println("2 - aby wypisać wszystkich studentów");
+        System.out.println("3 - aby wyszukać studenta po imieniu");
+        System.out.println("0 - aby wyjść z programu");
+		 var wybor = ReadChoice();
+       //return scan.nextInt();
+		 return wybor;
+		 
+	}
+	
     public static void exercise1() throws IOException, WrongStudentName,WrongStudentAge,WrongStudentDate {
         var name = ReadName();
         var age = ReadAge();
